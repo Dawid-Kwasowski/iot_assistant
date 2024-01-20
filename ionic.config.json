@@ -1,0 +1,7 @@
+{
+  "name": "iot_assistant",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
