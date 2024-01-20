@@ -7,9 +7,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeModule } from './pages/home/home.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HomeModule,
     SharedModuleModule,
     BrowserModule,
     IonicModule.forRoot(),
