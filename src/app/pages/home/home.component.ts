@@ -9,7 +9,7 @@ import { TextToSpeech } from '@capacitor-community/text-to-speech';
 })
 export class HomeComponent implements OnInit {
   
-  @Input() myText = 'Angela Pierdziella';
+  @Input() myText = '';
   public recording: boolean = false;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { 

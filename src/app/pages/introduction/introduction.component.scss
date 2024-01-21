@@ -1,0 +1,17 @@
+@use "/src/assets/scss/pages";
+
+
+.auth-title {
+   text-align: center;
+}
+
+.introduction {
+   
+   @extend %page-wrapper;
+
+   &__actions {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+   }
+}

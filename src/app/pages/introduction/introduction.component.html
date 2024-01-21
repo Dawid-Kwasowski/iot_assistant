@@ -1,0 +1,16 @@
+<ion-content class="ion-padding">
+  <div class="introduction">
+    <div class="introduction__title">
+      <h1 class="auth-title">{{ 'app.title' | translate }}</h1>
+    </div>
+    <div class="introduction__hero">
+      <ion-img
+      [src]="introductionImgPath"
+    ></ion-img>
+    </div>
+    <div class="introduction__actions">
+      <ion-button (click)="navigateTo('sign_on')">{{'introduction.button.sign_on' | translate}}</ion-button>
+      <ion-button (click)="navigateTo('auth')">{{'introduction.button.sign_in' | translate}}</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,41 @@
+{
+   "validations": {
+    "required": "The field is required",
+    "minLength": "The field must be at least {{number}} characters long",
+    "email": "Invalid email"
+   },
+   "app": {
+       "title": "IoT Assistant"
+   },
+   "introduction": {
+        "button": {
+            "sign_in": "Sign In",
+            "sign_on": "Create an account"
+        }
+   },
+   "sign_on": {
+       "title": "Just a few steps to get started",
+        "toolbar": {
+            "title": "Sign on"
+        },
+        "button": {
+            "next": "Next step",
+            "prev": "Previous step",
+            "sign_on": "I'm ready to go"
+        },
+        "fields": {
+            "email": {
+                "title": "The email Address",
+                "placeholder": "Type your email address"
+            },
+            "username": {
+                "title": "The username",
+                "placeholder": "What should we call you?"
+            },
+            "password": {
+                "title": "The password",
+                "placeholder": "Type your password"
+            }
+        }
+   }
+}

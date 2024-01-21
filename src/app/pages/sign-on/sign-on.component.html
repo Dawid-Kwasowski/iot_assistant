@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar class="ion-padding" color="primary">
+    <ion-title>
+      <h1>{{ "sign_on.toolbar.title" | translate }}</h1></ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="sign-on">
+    <div class="sign-on__hero">
+      <ion-img [src]="signOnImgPath"></ion-img>
+    </div>
+    <form [formGroup]="signOnForm">
+      <div class="sign-on__form">
+
+        <ion-card *ngIf="currentStep === 0">
+          <ion-card-content>
+            <ion-input
+              [errorText]="usernameError"
+              :placeholder="{{
+                'sign_on.fields.username.placeholder' | translate
+              }}"
+              formControlName="username"
+            ></ion-input>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card *ngIf="currentStep === 1">
+          <ion-card-content>
+            <ion-input
+              type="email"
+              [errorText]="emailError"
+              :placeholder="{{
+                'sign_on.fields.email.placeholder' | translate
+              }}"
+              formControlName="email"
+            ></ion-input>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="currentStep === 2">
+          <ion-card-content>
+            <ion-input
+              type="password"
+              [errorText]="passwordError"
+              :placeholder="{{
+                'sign_on.fields.password.placeholder' | translate
+              }}"
+              formControlName="password"
+            ></ion-input>
+          </ion-card-content>
+        </ion-card>
+
+        <div class="sign-on__actions">
+          <ion-button
+            [disabled]="disableActions"
+            *ngIf="currentStep < 2"
+            (click)="nextStep()"
+            >{{ "sign_on.button.next" | translate }}</ion-button
+          >
+          <ion-button *ngIf="currentStep > 0" (click)="prevStep()">{{
+            "sign_on.button.prev" | translate
+          }}</ion-button>
+          <ion-button
+            [disabled]="!signOnForm.valid"
+            color="success"
+            *ngIf="currentStep === 2"
+            (click)="nextStep()"
+            >{{ "sign_on.button.sign_on" | translate }}</ion-button
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>
