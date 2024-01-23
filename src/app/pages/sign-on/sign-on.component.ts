@@ -1,58 +1,52 @@
-import { Component, OnInit, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ViewWillLeave } from '@ionic/angular';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
-import type { QueryList } from '@angular/core';
-import type { Animation } from '@ionic/angular';
-import { IonCard } from '@ionic/angular';
-import { AnimationsService } from 'src/app/services/animations.service';
 
 @Component({
   selector: 'app-sign-on',
   templateUrl: './sign-on.component.html',
   styleUrls: ['./sign-on.component.scss']
 })
-export class SignOnComponent implements OnInit {
+export class SignOnComponent implements OnInit, ViewWillLeave {
 
-  @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<any>>;
+  @ViewChild('loadingTemplate') loadingTemplate!: TemplateRef<any>;
 
   public signOnImgPath: string = '/assets/images/login.svg';
   public signOnForm!: FormGroup;
 
   public currentStep: number = 0;
-
-  private cardA!: Animation;
-  private cardB!: Animation;
-  private cardC!: Animation;
-  
+  public registering: boolean = false;
 
   constructor(
     private formValidatorService: FormValidatorService,
-    private animationService: AnimationsService
+    private router: Router
     ) { }
+  ionViewWillLeave(): void {
+    this.registering = false;
+    console.log('ionViewWillLeave');
+  }
+  public navigateTo(name: string): void {
+    this.registering = true;
+    setTimeout((): void => {
+      this.router.navigate([`/${name}`]);
+    },4000);
+  }
+
   ngOnInit(): void {
     this.initForm();
   }
 
-  public async play(): Promise<void> {
-    await this.cardA.play();
-  }
-
-  public async stop(): Promise<void> {
-    this.cardA
-  }
-
   public async nextStep(): Promise<void> {
-
     if(this.currentStep >= 2) {
       this.currentStep = 0; return;
     }
-    const itemRef = this.cardElements?.get(this.currentStep)?.nativeElement;
-    this.cardA = this.animationService.translateUpAnimation(itemRef)
-    await this.play(); 
+
     this.currentStep++;
   }
 
-  public prevStep(): void {
+  public async prevStep() {
     if(this.currentStep <= 0) {
       this.currentStep = 0; return;
     }

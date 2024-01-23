@@ -5,7 +5,10 @@
     "email": "Invalid email"
    },
    "app": {
-       "title": "IoT Assistant"
+       "title": "IoT Assistant",
+       "general": {
+        "progress": "Response in progress"
+       }
    },
    "introduction": {
         "button": {

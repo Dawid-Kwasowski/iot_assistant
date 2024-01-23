@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormValidatorService } from './form-validator.service';
-import { AnimationsService } from './animations.service';
+// import { AnimationsService } from './animations.service';
 
 @NgModule({
   imports: [
@@ -9,7 +9,7 @@ import { AnimationsService } from './animations.service';
   ],
   providers: [
     FormValidatorService,
-    AnimationsService
+    // AnimationsService
   ],
 })
 export class ServicesModule { }

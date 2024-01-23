@@ -1,0 +1,14 @@
+<div class="spinner-wrapper">
+  <ion-spinner
+    [name]="name"
+    class="spinner" 
+    [ngClass]="{
+      'spinner--sm': size === 'sm', 
+      'spinner--md': size === 'md',
+      'spinner--lg': size === 'lg',
+    }" 
+    [color]="color"></ion-spinner>
+  <span
+  class="spinner__label" 
+  *ngIf="label">{{ label }}</span>
+</div>

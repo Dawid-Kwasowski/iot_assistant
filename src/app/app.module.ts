@@ -1,4 +1,3 @@
-import { SharedModuleModule } from './shared-module/sharedmodule.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -20,7 +19,6 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   imports: [
     PagesModule,
-    SharedModuleModule,
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({

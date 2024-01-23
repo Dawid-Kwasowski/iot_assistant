@@ -5,14 +5,18 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServicesModule } from 'src/app/services/services.module';
+import { ComponentsModule } from 'src/app/components/components/components.module';
+
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
     TranslateModule,
     ReactiveFormsModule,
-    ServicesModule
+    ServicesModule,
+    ComponentsModule
   ],
-  declarations: [SignOnComponent]
+  declarations: [SignOnComponent],
+  exports: [ComponentsModule]
 })
 export class SignOnModule { }
