@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ViewWillLeave } from '@ionic/angular';
+import { AppMqttCommunicationService } from 'src/app/services/app-mqtt-communication.service';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
 
 @Component({
@@ -20,17 +21,20 @@ export class SignOnComponent implements OnInit, ViewWillLeave {
   public registering: boolean = false;
 
   constructor(
-    private formValidatorService: FormValidatorService,
-    private router: Router
+    private _formValidatorService: FormValidatorService,
+    private _router: Router,
+    private _mqttCommunicationService: AppMqttCommunicationService
     ) { }
+    
   ionViewWillLeave(): void {
     this.registering = false;
     console.log('ionViewWillLeave');
   }
   public navigateTo(name: string): void {
     this.registering = true;
+    
     setTimeout((): void => {
-      this.router.navigate([`/${name}`]);
+      this._router.navigate([`/${name}`]);
     },4000);
   }
 
@@ -92,21 +96,21 @@ export class SignOnComponent implements OnInit, ViewWillLeave {
 
   public get emailError(): string | undefined {
     const emailControl = this.email;
-    if(emailControl?.getError('required')) return this.formValidatorService.getError('required');
-    if(emailControl?.getError('email')) return this.formValidatorService.getError('email');
+    if(emailControl?.getError('required')) return this._formValidatorService.getError('required');
+    if(emailControl?.getError('email')) return this._formValidatorService.getError('email');
     return;
   }
 
   public get usernameError(): string | undefined {
     const usernameControl = this.username;
-    if(usernameControl?.getError('required')) return this.formValidatorService.getError('required');
+    if(usernameControl?.getError('required')) return this._formValidatorService.getError('required');
     return;
   }
 
   public get passwordError(): string | undefined {
     const passwordControl = this.password;
-    if(passwordControl?.getError('required')) return this.formValidatorService.getError('required');
-    if(passwordControl?.getError('minLength')) return this.formValidatorService.getError('minLength');
+    if(passwordControl?.getError('required')) return this._formValidatorService.getError('required');
+    if(passwordControl?.getError('minLength')) return this._formValidatorService.getError('minLength');
     return;
   }
 }

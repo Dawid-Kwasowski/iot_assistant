@@ -61,6 +61,12 @@
 
         <div class="sign-on__actions">
           <ion-button
+          (click)="navigateTo('home')"
+          [disabled]="!signOnForm.valid"
+          color="success"
+          *ngIf="currentStep === 2"
+          >{{ "sign_on.button.sign_on" | translate }}</ion-button>
+          <ion-button
             [disabled]="disableActions"
             *ngIf="currentStep < 2"
             (click)="nextStep()"
@@ -69,12 +75,6 @@
           <ion-button *ngIf="currentStep > 0" (click)="prevStep()">{{
             "sign_on.button.prev" | translate
           }}</ion-button>
-          <ion-button
-            (click)="navigateTo('home')"
-            [disabled]="!signOnForm.valid"
-            color="success"
-            *ngIf="currentStep === 2"
-            >{{ "sign_on.button.sign_on" | translate }}</ion-button>
         </div>
       </div>
     </form>

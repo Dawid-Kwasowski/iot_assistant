@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,10 @@ export class HomeComponent implements OnInit {
   @Input() myText = '';
   public recording: boolean = false;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) { 
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private translate: TranslateService
+    ) { 
     SpeechRecognition.requestPermissions();
   }
 
@@ -28,7 +32,7 @@ export class HomeComponent implements OnInit {
         popup: true,
         partialResults: true,
         language: 'en-US',
-      })
+      });
 
       SpeechRecognition.addListener('partialResults', (data: any) => {
         console.log('partialResults was fired', data.matches);
