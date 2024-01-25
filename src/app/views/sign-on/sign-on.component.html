@@ -61,7 +61,7 @@
 
         <div class="sign-on__actions">
           <ion-button
-          (click)="navigateTo('home')"
+          (click)="navigateTo(['home','dashboard'])"
           [disabled]="!signOnForm.valid"
           color="success"
           *ngIf="currentStep === 2"

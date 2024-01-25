@@ -7,7 +7,15 @@
    "app": {
        "title": "IoT Assistant",
        "general": {
-        "progress": "Response in progress"
+            "progress": "Response in progress"
+       },
+       "navigation": {
+            "dashboard": {
+                "title": "Dashboard"
+            },
+            "favourites": {
+                "title": "Favourites"
+            }
        }
    },
    "introduction": {

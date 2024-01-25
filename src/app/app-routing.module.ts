@@ -1,23 +1,27 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { IntroductionComponent } from './pages/introduction/introduction.component';
-import { SignOnComponent } from './pages/sign-on/sign-on.component';
+import { HomeComponent } from './views/home/home.component';
+import { IntroductionComponent } from './views/introduction/introduction.component';
+import { SignOnComponent } from './views/sign-on/sign-on.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'test',
     component: HomeComponent,
     // loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
   },
   {
     path: '',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'introduction',
     component: IntroductionComponent,
   },
   {
     path: 'sign_on',
     component: SignOnComponent,
-  }
+  },
 ];
 @NgModule({
   imports: [

@@ -24,17 +24,17 @@ export class SignOnComponent implements OnInit, ViewWillLeave {
     private _formValidatorService: FormValidatorService,
     private _router: Router,
     private _mqttCommunicationService: AppMqttCommunicationService
-    ) { }
+  ) { }
     
   ionViewWillLeave(): void {
     this.registering = false;
     console.log('ionViewWillLeave');
   }
-  public navigateTo(name: string): void {
+  public navigateTo(name: string[]): void {
     this.registering = true;
     
     setTimeout((): void => {
-      this._router.navigate([`/${name}`]);
+      this._router.navigate(name);
     },4000);
   }
 
