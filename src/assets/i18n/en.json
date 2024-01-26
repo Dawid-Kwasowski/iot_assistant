@@ -11,10 +11,16 @@
        },
        "navigation": {
             "dashboard": {
-                "title": "Dashboard"
+                "title": "My house"
             },
             "favourites": {
                 "title": "Favourites"
+            },
+            "account": {
+                "title": "Me"
+            },
+            "room": {
+                "title": "Room"
             }
        }
    },

@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'sign_on',
     component: SignOnComponent,
   },
+  {
+    path: 'user',
+    loadChildren: () => import('./views/pages/user/user.module').then( m => m.UserPageModule)
+  },
 ];
 @NgModule({
   imports: [

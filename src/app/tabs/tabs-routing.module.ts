@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../views/pages/favourites/favourites.module').then((m) => m.FavouritesPageModule)
       },
       {
+        path: 'user',
+        loadChildren: () => import('../views/pages/user/user.module').then((m) => m.UserPageModule)
+      },
+      {
         path: '',
         redirectTo: '/home/dashboard',
         pathMatch: 'full'

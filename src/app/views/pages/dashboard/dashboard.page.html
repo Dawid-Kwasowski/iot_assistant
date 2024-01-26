@@ -1,13 +1,59 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>dashboard</ion-title>
+    <div class="toolbar">
+      <ion-button>
+        <ion-icon size="small"  name="home"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon size="small"   name="add"></ion-icon>
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">dashboard</ion-title>
+      <ion-title size="large">{{ "app.navigation.dashboard.title" | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="cards">
+    <ion-card color="primary">
+      <ion-card-header>
+        <ion-card-title>Nowe Urządzenie</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content> Card Content </ion-card-content>
+    </ion-card>
+    <ion-card color="secondary">
+      <ion-card-header>
+        <ion-card-title>Card Title</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content> Card Content </ion-card-content>
+    </ion-card>      
+  </div>
+  <div class="cards">
+    <ion-card color="primary">
+      <ion-card-header>
+        <ion-card-title>Nowe Urządzenie</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content> Card Content </ion-card-content>
+    </ion-card>
+    <ion-card color="secondary">
+      <ion-card-header>
+        <ion-card-title>Card Title</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content> Card Content </ion-card-content>
+    </ion-card>      
+  </div>
+  
+  
 </ion-content>
