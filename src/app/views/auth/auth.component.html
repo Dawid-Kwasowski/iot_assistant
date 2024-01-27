@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+   <ion-toolbar>
+     <ion-title>Me</ion-title>
+   </ion-toolbar>
+ </ion-header>
+ 
+ <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+          <ion-title size="large">
+              <span>{{"auth.title" | translate}}</span>
+          </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <form [formGroup]="logInForm">
+      <ion-card>
+        <ion-card-content>
+           <ion-input
+            [errorText]="emailError(email)"
+            type="email"
+            :placeholder="{{
+              'auth.fields.email.placeholder' | translate
+            }}"
+            formControlName="email"
+           ></ion-input>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content>
+           <ion-input
+           [errorText]="passwordError(password)"
+            type="password"
+            :placeholder="{{
+              'auth.fields.password.placeholder' | translate
+            }}"
+            formControlName="password"
+           ></ion-input>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card>
+        <ion-card-content>
+          <ion-button
+          (click)="handleLogin()"
+          [disabled]="!logInForm.valid" 
+          expand="block">
+            {{ "auth.button.login" | translate }}
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </form>
+</ion-content>

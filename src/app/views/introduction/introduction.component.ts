@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class IntroductionComponent implements OnInit {
 
   public introductionImgPath: string = '/assets/images/smart_home.svg';
-  
   constructor(
     private translate: TranslateService,
     private router: Router

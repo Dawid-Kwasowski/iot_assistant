@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { IntroductionComponent } from './views/introduction/introduction.component';
 import { SignOnComponent } from './views/sign-on/sign-on.component';
+import { AuthComponent } from './views/auth/auth.component';
 
 const routes: Routes = [
   {
@@ -19,8 +20,12 @@ const routes: Routes = [
     component: IntroductionComponent,
   },
   {
-    path: 'sign_on',
+    path: 'sign-on',
     component: SignOnComponent,
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
   {
     path: 'user',

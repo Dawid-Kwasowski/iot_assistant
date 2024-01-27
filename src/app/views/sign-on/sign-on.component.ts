@@ -2,15 +2,16 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ViewWillLeave } from '@ionic/angular';
-import { AppMqttCommunicationService } from 'src/app/services/app-mqtt-communication.service';
+import { FormValidator } from 'src/app/bases/form-validator';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
+import { SupabaseService } from 'src/app/services/supabase/supabase.service';
 
 @Component({
   selector: 'app-sign-on',
   templateUrl: './sign-on.component.html',
   styleUrls: ['./sign-on.component.scss']
 })
-export class SignOnComponent implements OnInit, ViewWillLeave {
+export class SignOnComponent extends FormValidator implements OnInit {
 
   @ViewChild('loadingTemplate') loadingTemplate!: TemplateRef<any>;
 
@@ -18,24 +19,34 @@ export class SignOnComponent implements OnInit, ViewWillLeave {
   public signOnForm!: FormGroup;
 
   public currentStep: number = 0;
-  public registering: boolean = false;
 
   constructor(
-    private _formValidatorService: FormValidatorService,
-    private _router: Router,
-    private _mqttCommunicationService: AppMqttCommunicationService
-  ) { }
-    
-  ionViewWillLeave(): void {
-    this.registering = false;
-    console.log('ionViewWillLeave');
+    public override _formValidatorService: FormValidatorService,
+    private _superService: SupabaseService,
+    private _router: Router
+  ) {
+    super(_formValidatorService);
   }
+
+  public async handleSignUp(): Promise<void> {
+    const loader = await this._superService.createLoader();
+    await loader.present();
+
+    try {
+      const { data, error } = await this._superService.signUp({
+        email: this.email?.value,
+        password: this.password?.value,
+      });
+      await loader.dismiss();
+      this.navigateTo(['home','dashboard']);
+    } catch (error: any) {
+      await loader.dismiss();
+      await this._superService.createNotice(error.error_description || error.message, "danger");
+    }
+  }
+  
   public navigateTo(name: string[]): void {
-    this.registering = true;
-    
-    setTimeout((): void => {
-      this._router.navigate(name);
-    },4000);
+    this._router.navigate(name);
   }
 
   ngOnInit(): void {
@@ -91,26 +102,5 @@ export class SignOnComponent implements OnInit, ViewWillLeave {
 
   public get username(): AbstractControl<any,any> | null {
     return this.signOnForm.get('username');
-  }
-
-
-  public get emailError(): string | undefined {
-    const emailControl = this.email;
-    if(emailControl?.getError('required')) return this._formValidatorService.getError('required');
-    if(emailControl?.getError('email')) return this._formValidatorService.getError('email');
-    return;
-  }
-
-  public get usernameError(): string | undefined {
-    const usernameControl = this.username;
-    if(usernameControl?.getError('required')) return this._formValidatorService.getError('required');
-    return;
-  }
-
-  public get passwordError(): string | undefined {
-    const passwordControl = this.password;
-    if(passwordControl?.getError('required')) return this._formValidatorService.getError('required');
-    if(passwordControl?.getError('minLength')) return this._formValidatorService.getError('minLength');
-    return;
   }
 }

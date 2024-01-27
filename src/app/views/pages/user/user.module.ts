@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { UserPageRoutingModule } from './user-routing.module';
 
 import { UserPage } from './user.page';
@@ -13,7 +13,8 @@ import { UserPage } from './user.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    UserPageRoutingModule
+    UserPageRoutingModule,
+    TranslateModule
   ],
   declarations: [UserPage]
 })

@@ -7,14 +7,7 @@
 </ion-header>
 
 <ion-content #userInputCard class="ion-padding">
-
-  <ng-template #loadingTemplate>
-    <div class="loading-template">
-      <app-spinner name="circular" :label="{{'app.general.progress' | translate}}" size="md" color="primary"></app-spinner>
-    </div>
-  </ng-template>
-  
-  <div class="sign-on" *ngIf="!registering else loadingTemplate">
+  <div class="sign-on">
     <div class="sign-on__hero">
       <ion-img [src]="signOnImgPath"></ion-img>
     </div>
@@ -24,7 +17,7 @@
         <ion-card *ngIf="currentStep === 0">
           <ion-card-content>
             <ion-input
-              [errorText]="usernameError"
+              [errorText]="usernameError(username)"
               :placeholder="{{
                 'sign_on.fields.username.placeholder' | translate
               }}"
@@ -37,7 +30,7 @@
           <ion-card-content>
             <ion-input
               type="email"
-              [errorText]="emailError"
+              [errorText]="emailError(email)"
               :placeholder="{{
                 'sign_on.fields.email.placeholder' | translate
               }}"
@@ -50,7 +43,7 @@
           <ion-card-content>
             <ion-input
               type="password"
-              [errorText]="passwordError"
+              [errorText]="passwordError(password)"
               :placeholder="{{
                 'sign_on.fields.password.placeholder' | translate
               }}"
@@ -61,7 +54,7 @@
 
         <div class="sign-on__actions">
           <ion-button
-          (click)="navigateTo(['home','dashboard'])"
+          (click)="handleSignUp()"
           [disabled]="!signOnForm.valid"
           color="success"
           *ngIf="currentStep === 2"

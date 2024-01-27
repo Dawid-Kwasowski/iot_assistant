@@ -24,11 +24,41 @@
             }
        }
    },
+   "user": {
+    "settings": {
+        "logout": {
+            "actions": {
+                "title": "Are you sure you want to log out",
+                "buttons": {
+                    "confirm": "Yes I'm sure",
+                    "cancel": "Cancel"
+                }
+            },
+            "title": "Logout"
+        }
+    }
+    },
    "introduction": {
         "button": {
             "sign_in": "Sign In",
             "sign_on": "Create an account"
         }
+   },
+   "auth": {
+    "title": "Log In",
+    "button": {
+        "login": "Login"
+    },
+    "fields": {
+        "email": {
+            "title": "Email address",
+            "placeholder": "Type your email address"
+        },
+        "password": {
+            "title": "The password",
+            "placeholder": "Type your password"
+        }
+    }
    },
    "sign_on": {
        "title": "Just a few steps to get started",
@@ -42,7 +72,7 @@
         },
         "fields": {
             "email": {
-                "title": "The email Address",
+                "title": "Email Address",
                 "placeholder": "Type your email address"
             },
             "username": {
