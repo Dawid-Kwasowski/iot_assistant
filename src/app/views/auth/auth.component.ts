@@ -3,7 +3,6 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { FormValidator } from 'src/app/bases/form-validator';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
-import { IntroductionComponent } from '../introduction/introduction.component';
 import { SupabaseService } from 'src/app/services/supabase/supabase.service';
 @Component({
   selector: 'app-auth',
@@ -15,13 +14,10 @@ export class AuthComponent extends FormValidator implements OnInit {
   constructor(
     protected override _formValidatorService: FormValidatorService,
     private readonly _superService: SupabaseService,
-    private _router: Router
+    private _router: Router,
     ) {
     super(_formValidatorService);
   }
-
-  public component = IntroductionComponent;
-
 
   public logInForm!: FormGroup;
 
@@ -47,7 +43,6 @@ export class AuthComponent extends FormValidator implements OnInit {
     await loader.present();
     try {
       const { data, error } = await this._superService.signIn(this.email?.value, this.password?.value);
-      console.log(data);
       if (error) {
         throw error;
       }

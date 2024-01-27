@@ -32,6 +32,7 @@
     "@capacitor/preferences": "^5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
+    "@ngrx/store": "^17.1.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@supabase/supabase-js": "^2.39.3",
@@ -67,7 +68,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ts-node": "^8.3.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "@ngrx/eslint-plugin": "^17.1.0"
   },
   "description": "An Ionic project"
 }

@@ -30,6 +30,10 @@ export class SupabaseService {
     .single()
   }
 
+  public async retrieveUser() {
+    return this.supabase.auth.getUser();
+  }
+
   public authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     return this.supabase.auth.onAuthStateChange(callback)
   }

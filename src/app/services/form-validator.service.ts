@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject, Observable, takeUntil } from 'rxjs';
+import { Subject, Observable, takeUntil, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ public errors = new Map<string, Observable<any>>([
 
 public getError(errorType: string): string | undefined {
   let result: string | undefined;
-  this.errors.get(errorType)?.pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+  this.errors.get(errorType)?.pipe(take(1)).subscribe({
     next: (value: string | undefined): void => {
       result = value;
     },
