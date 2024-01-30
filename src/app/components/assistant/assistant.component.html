@@ -1,0 +1,25 @@
+<ion-header>
+   <ion-toolbar>
+    <ion-title>{{ "assistant.title" | translate }}</ion-title>
+    <ion-progress-bar *ngIf="recording" color="danger" type="indeterminate"></ion-progress-bar>
+   </ion-toolbar>
+ </ion-header>
+ <ion-content class="ion-padding assistant">
+  <ion-fab vertical="top" horizontal="center">
+    <ion-fab-button size="large" color="danger">
+      <ion-icon color="light" name="mic"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card class="command-list">
+    <ion-card-header>
+      <ion-card-title>{{"assistant.commands.title" | translate}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let command of getCommandList">
+          <ion-label>{{command[1].name}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+ </ion-content>

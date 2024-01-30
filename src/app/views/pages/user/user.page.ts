@@ -37,6 +37,10 @@ export class UserPage implements OnInit {
             title: 'Personal Information',
             link: ''
           },
+          {
+            title: 'Commands list',
+            link: 'commands'
+          }
         ]
       }
     ];

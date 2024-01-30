@@ -4,9 +4,21 @@
       <ion-button>
         <ion-icon size="small"  name="home"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon size="small"   name="add"></ion-icon>
+      <ion-button id="add-button">
+        <ion-icon size="small" name="add"></ion-icon>
       </ion-button>
+      
+      <ion-popover trigger="add-button" side="bottom" alignment="center">
+        <ng-template>
+          <ion-content class="ion-padding">
+            <ion-list>
+              <ion-item (click)="addCommandDialog()" [button]="true" [detail]="false">{{ "dashboard.new_items.command" | translate}}</ion-item>
+              <ion-item [button]="true" [detail]="false">{{ "dashboard.new_items.device" | translate}}</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+
     </div>
   </ion-toolbar>
 </ion-header>
@@ -58,3 +70,5 @@
     </ion-card>      
   </div>
 </ion-content>
+
+

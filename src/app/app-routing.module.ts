@@ -29,7 +29,11 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import('./views/pages/user/user.module').then( m => m.UserPageModule)
+    loadChildren: () => import('./views/pages/user/user.module').then( m => m.UserPageModule),
+  },
+  {
+    path: 'commands',
+    loadChildren: () => import('./views/pages/commands/commands.module').then( m => m.CommandsPageModule)
   },
 ];
 @NgModule({

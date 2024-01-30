@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { SpinnerComponent } from './spinner/spinner.component';
-
+import { AssistantComponent } from './assistant/assistant.component';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    TranslateModule
   ],
 
-  declarations: [SpinnerComponent],
-  exports: [SpinnerComponent]
+  declarations: [AssistantComponent],
+  exports: [AssistantComponent]
 })
 export class ComponentsModule { }

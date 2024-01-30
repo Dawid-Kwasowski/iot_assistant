@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 import { RouterModule } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule,
     TranslateModule,
-    RouterModule
+    RouterModule,
+    ComponentsModule,
   ],
   declarations: [TabsPage]
 })

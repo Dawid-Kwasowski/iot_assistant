@@ -12,6 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PagesModule } from './views/pages.module';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './stores/user/user.reducer';
+import { commandReducer } from './stores/command/command.reducer';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     StoreModule.forRoot({
       user: userReducer,
+      commands: commandReducer
     })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

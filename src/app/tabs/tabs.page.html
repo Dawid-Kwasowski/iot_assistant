@@ -6,20 +6,20 @@
       <ion-label>{{ "app.navigation.dashboard.title" | translate }}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button color="danger">
+    <!-- <ion-tab-button color="danger">
       <ion-icon size="large" name="grid-outline"></ion-icon>
       <ion-label>{{ "app.navigation.room.title" | translate }}</ion-label>
     </ion-tab-button> 
-
-    <ion-tab-button class="mic" color="danger">
+     -->
+    <ion-tab-button #mic class="mic" color="danger">
       <ion-icon size="large" name="mic"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </ion-tab-button> 
 
-    <ion-tab-button tab="favourites" href="/home/favourites">
+    <!-- <ion-tab-button tab="favourites" href="/home/favourites">
       <ion-icon aria-hidden="true" name="heart"></ion-icon>
       <ion-label>{{ "app.navigation.favourites.title" | translate }}</ion-label>
-    </ion-tab-button>
+    </ion-tab-button> -->
 
     <ion-tab-button tab="user" href="/home/user">
       <ion-icon size="large" name="person-circle-outline"></ion-icon>

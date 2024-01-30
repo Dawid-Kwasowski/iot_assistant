@@ -24,6 +24,26 @@
             }
        }
    },
+   "dashboard": {
+        "new_items": {
+            "command": "Add command",
+            "device": "Add device"
+        }
+   },
+   "assistant": {
+        "title": "Your IoT Assistant",
+        "commands": {
+            "title": "List of commands"
+        }
+   },
+   "commands": {
+    "title": "List of commands",
+    "fields": {
+        "add": "Add command",
+        "edit": "Edit",
+        "delete": "Delete"
+    }
+   },
    "user": {
     "settings": {
         "logout": {

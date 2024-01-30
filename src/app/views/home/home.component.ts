@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
       SpeechRecognition.addListener('partialResults', (data: any) => {
         console.log('partialResults was fired', data.matches);
-        if(data.matches.length &&data.matches.length > 0) {
+        if(data.matches.length && data.matches.length > 0) {
           this.myText = data.matches[0];
           this.changeDetectorRef.detectChanges();
         }

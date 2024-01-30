@@ -31,7 +31,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list [inset]="true">
-        <ion-item button="" *ngFor="let settings of gSettings.group">
+        <ion-item (click)="navigateTo([settings.link])" button *ngFor="let settings of gSettings.group">
           <ion-label>{{ settings.title }}</ion-label>
         </ion-item>
       </ion-list>

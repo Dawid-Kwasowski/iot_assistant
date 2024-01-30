@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPage implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addCommandDialog() {
+    throw new Error('Method not implemented.');
   }
 
   public handleRefresh(event: any) {
