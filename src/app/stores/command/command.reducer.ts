@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { ICommand } from "./model/ICommand";
-import { addAction, clearAction, getAction, removeAction } from "./command.actions";
+import { addAction, clearAction, removeAction } from "./command.actions";
 
 
 export const initialState: ICommand = {
@@ -16,7 +16,6 @@ export const initialState: ICommand = {
 
 export const commandReducer = createReducer(
    initialState,
-   on(getAction, (state): ICommand => state),
    on(clearAction, (): any => {}),
    on(addAction, (state, { command }): ICommand =>  ({...state, ...command})), 
    on(removeAction, (state, { id }): ICommand => {

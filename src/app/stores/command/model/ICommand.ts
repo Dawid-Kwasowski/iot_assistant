@@ -1,5 +1,5 @@
 export interface ICommand {
-   [key: number | string]: ICommandDescription
+   [key: number | string]: ICommandDescription;
 }
 
 export interface ICommandDescription {

@@ -6,6 +6,4 @@ export const addAction = createAction('[Command List] Add', props<{command: ICom
 
 export const removeAction = createAction('[Command List] Remove', props<{ id: string | number }>());
 
-export const getAction = createAction('[Command List] Get');
-
 export const clearAction = createAction('[Command List] Clear');
