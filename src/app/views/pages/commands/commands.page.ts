@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { CommandsService } from 'src/app/services/commands.service';
@@ -14,6 +15,7 @@ export class CommandsPage implements OnInit {
   constructor(
     private _store: Store<{commands: ICommand}>,
     private commandService: CommandsService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class CommandsPage implements OnInit {
   private commandList!: ICommand;
 
   public get getCommandList() {
-    return Object.entries(this.commandList);
+    return this.commandList ? Object.entries(this.commandList) : [];
   }
 
   public async getCommands() {
@@ -40,17 +42,23 @@ export class CommandsPage implements OnInit {
   }
   
   public async addCommand() {
-    await this.commandService.addCommand();
-    this.updateState();
+    const { role } = await this.commandService.addCommand();
+    if(role === 'confirm') {
+      this.updateState();
+    }
   }
-
-  // public editCommand(command: ICommand) {
-  //   throw new Error('Method not implemented.');
-  // }
   
   public deleteCommand(id: string | number) {
     this.commandService.deleteCommand(id);
     this.updateState();
   }
 
+  public clearCommands() {
+    this.commandService.clearCommands();
+    this.updateState();
+  }
+  
+  public navigateTo(path: string[]) {
+    this._router.navigate(path);
+  }
 }

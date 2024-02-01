@@ -12,7 +12,7 @@
         <ng-template>
           <ion-content class="ion-padding">
             <ion-list>
-              <ion-item (click)="addCommandDialog()" [button]="true" [detail]="false">{{ "dashboard.new_items.command" | translate}}</ion-item>
+              <ion-item (click)="addCommand()" [button]="true" [detail]="false">{{ "dashboard.new_items.command" | translate}}</ion-item>
               <ion-item [button]="true" [detail]="false">{{ "dashboard.new_items.device" | translate}}</ion-item>
             </ion-list>
           </ion-content>
@@ -23,7 +23,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding" [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -32,6 +32,9 @@
       <ion-title size="large">{{ "app.navigation.dashboard.title" | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-button (click)="powerOnDevice()" expand="block">Turn on Smart Socket</ion-button>
+  <ion-button color="danger" (click)="powerOffDevice()" expand="block">Turn off Smart Socket</ion-button>
 
   <div class="cards">
     <ion-card>
@@ -67,8 +70,12 @@
       </ion-card-header>
     
       <ion-card-content> Card Content </ion-card-content>
-    </ion-card>      
+    </ion-card>
+    
   </div>
+
+
+
 </ion-content>
 
 

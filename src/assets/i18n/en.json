@@ -7,7 +7,10 @@
    "app": {
        "title": "IoT Assistant",
        "general": {
-            "progress": "Response in progress"
+            "progress": "Response in progress",
+            "buttons": {
+                "backButton": "Back"
+            }
        },
        "navigation": {
             "dashboard": {
@@ -41,7 +44,11 @@
     "fields": {
         "add": "Add command",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "deleteAll": "Delete all commands"
+    },
+    "info": {
+        "noCommands": "No commands available"
     }
    },
    "user": {

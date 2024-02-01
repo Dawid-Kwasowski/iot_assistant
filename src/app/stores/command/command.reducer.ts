@@ -5,12 +5,12 @@ import { addAction, clearAction, getAction, removeAction } from "./command.actio
 
 export const initialState: ICommand = {
    123: {
-      command: "Switch on the smart socket",
-      name: "Switch on the smart socket"
+      command: "ON",
+      name: "Turn on",
    },
    234: {
-      command: "Switch off the smart socket",
-      name: "Switch off the smart socket"
+      command: "OFF",
+      name: "Turn off",
    }
 };
 
@@ -18,7 +18,7 @@ export const commandReducer = createReducer(
    initialState,
    on(getAction, (state): ICommand => state),
    on(clearAction, (): any => {}),
-   on(addAction, (state, newState): ICommand => ({...state, ...newState})), 
+   on(addAction, (state, { command }): ICommand =>  ({...state, ...command})), 
    on(removeAction, (state, { id }): ICommand => {
       const { [id]: removedItem, ...rest } = state;
       return rest;
