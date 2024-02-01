@@ -13,6 +13,8 @@ import { PagesModule } from './views/pages.module';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './stores/user/user.reducer';
 import { commandReducer } from './stores/command/command.reducer';
+import { deviceReducer } from './stores/device/device.reducer';
+import { TemplatesModule } from './templates/templates.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -22,6 +24,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   imports: [
     PagesModule,
+    TemplatesModule,
     BrowserModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -38,7 +41,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     StoreModule.forRoot({
       user: userReducer,
-      commands: commandReducer
+      commands: commandReducer,
+      device: deviceReducer,
     })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

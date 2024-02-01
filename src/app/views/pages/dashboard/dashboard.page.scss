@@ -1,9 +1,10 @@
 .cards {
    display: flex;
+   flex-direction: column;
 }
 
 .toolbar {
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-end;
    padding: 15px;
 }

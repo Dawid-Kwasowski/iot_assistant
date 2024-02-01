@@ -1,7 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Component, OnDestroy, OnInit, computed } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 import { CommandsService } from 'src/app/services/commands.service';
+import { DeviceService } from 'src/app/services/device.service';
 import { MqttService } from 'src/app/services/mqtt/mqtt.service';
+import { IDevice, IDeviceDescription } from 'src/app/stores/device/model/IDevice';
+import { SmartsocketTemplateComponent } from 'src/app/templates/smartsocket-template/smartsocket-template.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,29 +13,33 @@ import { MqttService } from 'src/app/services/mqtt/mqtt.service';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit, OnDestroy {
-
-
-
   constructor(
-    private mqttService: MqttService,
-    private commandService: CommandsService,
-    private toastCtrl: ToastController,
-    ) { }
+    private _mqttService: MqttService,
+    private _commandService: CommandsService,
+    private _deviceService: DeviceService,
+    private _store: Store<{device: IDevice}>,
+    private modalController: ModalController
+  ) { }
+
+  public readonly devicesList = this._store.selectSignal(({ device }): IDevice => device);
+
+  public deviceArray = computed((): [string, IDeviceDescription][] => Object.entries(this.devicesList()));
 
   async ngOnInit() {
-    await this.mqttService.connect();
+    await this._mqttService.connect();
   }
 
   async ngOnDestroy() {
-    await this.mqttService.disconnect();
+    await this._mqttService.disconnect();
   }
 
   public async addCommand() {
-    const { role } = await this.commandService.addCommand();
-    if(role === 'confirm') {
-      const toast = await this.toastCtrl.create({message: "Command has been added", duration: 3000, color: 'success'});
-      toast.present();
-    }
+    await this._commandService.addCommand();
+
+  }
+
+  public async addDevice() {
+    await this._deviceService.addDevice();
   }
 
   public handleRefresh(event: any) {
@@ -42,13 +50,35 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   public async powerOnDevice() {
-    this.mqttService.powerOnDevice();
-    }
-    powerOffDevice() {
-      this.mqttService.powerOffDevice();
+    this._mqttService.powerOnDevice();
+  }
+  
+  public powerOffDevice() {
+    this._mqttService.powerOffDevice();
+  }
+
+
+  public async openTemplate(payload: IDeviceDescription): Promise<void> {
+
+    let module;
+
+    switch (payload.type) {
+      case "smartsocket":
+        module = SmartsocketTemplateComponent
+        break;
+    
+      default:
+        break;
     }
 
-  public async test() {
-     
+    if(!module) return;
+
+    const modal = await this.modalController.create({
+      component: module,
+      componentProps: {
+        data: payload,
+      }
+    });
+    modal.present();
   }
 }

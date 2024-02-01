@@ -6,7 +6,7 @@ export const initialState: IDevice = {
     123: {
         name: "tasmota_A06894",
         topic: 'tasmota_A06894',
-        type: "smart_socket",
+        type: "smartsocket",
     }
 }
 
@@ -18,4 +18,4 @@ export const deviceReducer = createReducer(
         const { [id]: removedItem, ...rest } = state;
         return rest;
     })
-)
+);

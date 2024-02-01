@@ -17,7 +17,7 @@
         <ion-card *ngIf="currentStep === 0">
           <ion-card-content>
             <ion-input
-              [errorText]="usernameError(username)"
+              [errorText]="nameError(username)"
               :placeholder="{{
                 'sign_on.fields.username.placeholder' | translate
               }}"

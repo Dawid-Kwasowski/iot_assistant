@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">{{ "devices.modal.cancel" | translate }}</ion-button>
+    </ion-buttons>
+    <ion-title>{{ "devices.modal.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!deviceForm.valid" (click)="confirm()" [strong]="true">{{ "devices.modal.confirm" | translate }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="deviceForm">
+    <ion-card>
+      <ion-card-content>
+        <ion-input
+          formControlName="name" 
+          [errorText]="nameError(name)"
+          :placeholder="{{
+            'devices.modal.fields.name' | translate
+          }}"></ion-input>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-input
+        formControlName="topic"  
+        [errorText]="nameError(topic)"
+        :placeholder="{{
+          'devices.modal.fields.topic' | translate
+        }}"></ion-input>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-select formControlName="type">
+         <div slot="label">{{ 'devices.modal.fields.title' | translate }} <ion-text color="danger">(Required)</ion-text></div>
+          <ion-select-option *ngFor="let device of deviceTypes" [value]="device">
+            {{ "devices.modal.deviceType." + device | translate }}
+          </ion-select-option>  
+      </ion-select>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
+</ion-content>

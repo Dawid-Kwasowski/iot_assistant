@@ -12,7 +12,7 @@ export class FormValidator {
     }
 
 
-    public usernameError(controlName: AbstractControl<any, any> | null): string | undefined {
+    public nameError(controlName: AbstractControl<any, any> | null): string | undefined {
       const usernameControl = controlName;
       if(usernameControl?.getError('required')) return this._formValidatorService.getError('required');
       return;

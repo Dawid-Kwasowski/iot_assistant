@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ICommand } from '../stores/command/model/ICommand';
 import { addAction, clearAction, removeAction } from '../stores/command/command.actions';
-import { AlertController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { v4 as uuidv4 } from 'uuid';
+import { CommandModalComponent } from '../components/command-modal/command-modal.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,8 @@ export class CommandsService {
 
   constructor(
     private _store: Store<{commands: ICommand}>,
-    private alertController: AlertController
+    private modalController: ModalController,
+    private _toastCtrl: ToastController,
   ) { }
 
   public deleteCommand(id: string | number): void {
@@ -19,40 +21,22 @@ export class CommandsService {
   }
 
   public async addCommand() {
-    const alert = await this.alertController.create({
-      header: 'Add a new command',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Confirm',
-          role: 'confirm',
-          handler: (value): void => {
-            if(value.name.length === 0 || value.command.length === 0) return;
-            const uuid = uuidv4();
-            const command = {[uuid]: {...value}};
-            this._store.dispatch(addAction({command}));
-          },
-        }
-    ],
-      inputs: [
-        {
-          type: 'text',
-          name: 'name',
-          placeholder: 'Command name',
-        },
-        {
-          type: 'text',
-          name: 'command',
-          placeholder: 'Type command'
-        },
-      ],
-      
-    })
-    await alert.present();
-    return await alert.onDidDismiss();
+    const modal = await this.modalController.create({
+      component: CommandModalComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      const uuid = uuidv4();
+      const command = {[uuid]: {...data}};
+      this._store.dispatch(addAction({ command }));
+      const toast = await this._toastCtrl.create({message: "Command has been added", duration: 3000, color: 'success'});
+      toast.present();
+    }
+
+    return await modal.onDidDismiss();
   }
 
   public clearCommands(): void {

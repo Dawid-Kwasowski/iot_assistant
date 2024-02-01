@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
 import { CommandsService } from 'src/app/services/commands.service';
-import { ICommand } from 'src/app/stores/command/model/ICommand';
+import { ICommand, ICommandDescription } from 'src/app/stores/command/model/ICommand';
 
 @Component({
   selector: 'app-commands',
@@ -18,44 +17,23 @@ export class CommandsPage implements OnInit {
     private _router: Router
   ) { }
 
-  ngOnInit() {
-    this.updateState()
-  }
 
-  public updateState() {
-    this.getCommands();
-    this.getCommandList;
-  }
- 
-  private commandList!: ICommand;
+  public readonly commands = this._store.selectSignal(({ commands }): ICommand => commands);
 
-  public get getCommandList() {
-    return this.commandList ? Object.entries(this.commandList) : [];
-  }
+  public commandsArray = computed((): [string, ICommandDescription][] => Object.entries(this.commands()));
 
-  public async getCommands() {
-    this._store.select('commands').pipe(take(1)).subscribe({
-      next: (data: any) => {
-        this.commandList = data;
-      }
-    });
-  }
+  ngOnInit(): void {}
   
   public async addCommand() {
-    const { role } = await this.commandService.addCommand();
-    if(role === 'confirm') {
-      this.updateState();
-    }
+    await this.commandService.addCommand();
   }
   
   public deleteCommand(id: string | number) {
     this.commandService.deleteCommand(id);
-    this.updateState();
   }
 
   public clearCommands() {
     this.commandService.clearCommands();
-    this.updateState();
   }
   
   public navigateTo(path: string[]) {

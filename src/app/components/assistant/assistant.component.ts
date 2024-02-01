@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
 import { MqttService } from 'src/app/services/mqtt/mqtt.service';
-import { ICommand } from 'src/app/stores/command/model/ICommand';
+import { ICommand, ICommandDescription } from 'src/app/stores/command/model/ICommand';
 
 @Component({
   selector: 'app-assistant',
@@ -20,11 +19,14 @@ export class AssistantComponent implements OnInit, OnDestroy {
     ) {
       SpeechRecognition.requestPermissions();
     }
+
+  public readonly commands = this._store.selectSignal(({ commands }): ICommand => commands);
+  
+  public commandsArray = computed((): [string, ICommandDescription][] => Object.entries(this.commands()));
+
   
   public async ngOnInit(): Promise<void> {
     this.startRecognition();
-    this.getCommands();
-    this.getCommandList;
   }
 
   public async ngOnDestroy(): Promise<void> {
@@ -36,15 +38,8 @@ export class AssistantComponent implements OnInit, OnDestroy {
 
   private timeout!: any;
 
-  private commandList!: ICommand;
-  
-
-  public get getCommandList() {
-    return this.commandList ? Object.entries(this.commandList) : [];
-  }
-
   public onListening(): void {
-    if(this.recording && this.getCommandList.length > 0) {
+    if(this.recording && this.commandsArray().length > 0) {
       this.stopRecognition();
     } else {
       this.startRecognition();
@@ -100,11 +95,5 @@ export class AssistantComponent implements OnInit, OnDestroy {
     await SpeechRecognition.stop();
   }
 
-  public async getCommands() {
-    this._store.select('commands').pipe(take(1)).subscribe({
-      next: (data: any) => {
-        this.commandList = data;
-      }
-    })
-  }
+  
 }

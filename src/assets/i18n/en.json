@@ -41,7 +41,14 @@
    },
    "commands": {
     "title": "List of commands",
+    "modal": {
+        "title": "Add a new command",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+    },
     "fields": {
+        "command": "Type the command",
+        "name": "Type the name",
         "add": "Add command",
         "edit": "Edit",
         "delete": "Delete",
@@ -49,6 +56,25 @@
     },
     "info": {
         "noCommands": "No commands available"
+    }
+   },
+   "devices": {
+    "modal": {
+        "title": "Add a new device",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "backButton": "Back",
+        "fields": {
+            "title": "List of devices",
+            "name": "Type the device name",
+            "topic": "Add a device topic",
+            "type": "Select a device type"
+        },
+        "deviceType": {
+            "smartsocket": "Smart socket",
+            "pir": "PIR",
+            "light": "Light"
+        }
     }
    },
    "user": {

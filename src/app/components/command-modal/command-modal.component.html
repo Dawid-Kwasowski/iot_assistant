@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">{{ "commands.modal.cancel" | translate }}</ion-button>
+    </ion-buttons>
+    <ion-title>{{ "commands.modal.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!commandForm.valid" (click)="confirm()" [strong]="true">{{ "commands.modal.confirm" | translate }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="commandForm">
+    <ion-card>
+      <ion-card-content>
+        <ion-input
+          formControlName="name" 
+          [errorText]="nameError(name)"
+          :placeholder="{{
+            'commands.fields.name' | translate
+          }}"></ion-input>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-input
+        formControlName="command"  
+        [errorText]="nameError(command)"
+        :placeholder="{{
+          'commands.fields.command' | translate
+        }}"></ion-input>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
+</ion-content>

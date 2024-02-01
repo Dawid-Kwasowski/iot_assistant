@@ -6,7 +6,7 @@
  </ion-header>
  <ion-content class="ion-padding assistant">
   <ion-fab vertical="top" horizontal="center">
-    <ion-fab-button [disabled]="getCommandList.length < 1" (click)="onListening()" size="large" color="danger">
+    <ion-fab-button [disabled]="commandsArray().length < 1" (click)="onListening()" size="large" color="danger">
       <ion-icon color="light" *ngIf="recording" name="mic"></ion-icon>
       <ion-icon color="light" *ngIf="!recording" name="mic-off"></ion-icon>
     </ion-fab-button>
@@ -17,8 +17,8 @@
     </ion-card-header>
     <ion-card-content>
     {{myText()}}
-      <ion-list [inset]="true" *ngIf="getCommandList.length > 0; else noDataTemplate">
-        <ion-item *ngFor="let command of getCommandList">
+      <ion-list [inset]="true" *ngIf="commandsArray().length > 0; else noDataTemplate">
+        <ion-item *ngFor="let command of commandsArray()">
           <ion-label>{{command[1].name}}</ion-label>
         </ion-item>
       </ion-list>

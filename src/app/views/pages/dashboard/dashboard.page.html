@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <div class="toolbar">
-      <ion-button>
+      <!-- <ion-button>
         <ion-icon size="small"  name="home"></ion-icon>
-      </ion-button>
+      </ion-button> -->
       <ion-button id="add-button">
         <ion-icon size="small" name="add"></ion-icon>
       </ion-button>
@@ -13,7 +13,7 @@
           <ion-content class="ion-padding">
             <ion-list>
               <ion-item (click)="addCommand()" [button]="true" [detail]="false">{{ "dashboard.new_items.command" | translate}}</ion-item>
-              <ion-item [button]="true" [detail]="false">{{ "dashboard.new_items.device" | translate}}</ion-item>
+              <ion-item (click)="addDevice()" [button]="true" [detail]="false">{{ "dashboard.new_items.device" | translate}}</ion-item>
             </ion-list>
           </ion-content>
         </ng-template>
@@ -37,45 +37,16 @@
   <ion-button color="danger" (click)="powerOffDevice()" expand="block">Turn off Smart Socket</ion-button>
 
   <div class="cards">
-    <ion-card>
+    <ion-card (click)="openTemplate(device[1])" *ngFor="let device of deviceArray()">
       <ion-card-header>
-        <ion-card-title>Nowe Urządzenie</ion-card-title>
-        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-card-title>{{device[1].name}}</ion-card-title>
+        <ion-card-subtitle>{{device[1].type}}</ion-card-subtitle>
       </ion-card-header>
-    
-      <ion-card-content> Card Content </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Card Title</ion-card-title>
-        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content> Card Content </ion-card-content>
-    </ion-card>    
+      <ion-card-content>
+        Topic: {{device[1].topic}}
+      </ion-card-content>
+    </ion-card> 
   </div>
-    <div class="cards">
-    <ion-card color="primary">
-      <ion-card-header>
-        <ion-card-title>Nowe Urządzenie</ion-card-title>
-        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content> Card Content </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Card Title</ion-card-title>
-        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content> Card Content </ion-card-content>
-    </ion-card>
-    
-  </div>
-
-
-
 </ion-content>
 
 
