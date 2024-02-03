@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ViewWillLeave } from '@ionic/angular';
 import { FormValidator } from 'src/app/bases/form-validator';
 import { FormValidatorService } from 'src/app/services/form-validator.service';
 import { SupabaseService } from 'src/app/services/supabase/supabase.service';
