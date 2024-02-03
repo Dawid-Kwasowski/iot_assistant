@@ -31,7 +31,8 @@
         "new_items": {
             "command": "Add command",
             "device": "Add device"
-        }
+        },
+        "edit": "Edit"
    },
    "assistant": {
         "title": "Your IoT Assistant",
@@ -64,6 +65,7 @@
         "cancel": "Cancel",
         "confirm": "Confirm",
         "backButton": "Back",
+        "delete": "Delete",
         "fields": {
             "title": "List of devices",
             "name": "Type the device name",

@@ -3,20 +3,25 @@
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">{{ "devices.modal.backButton" | translate }}</ion-button>
     </ion-buttons>
-    <ion-title>{{ data.name }}</ion-title>
+    <ion-title>{{ data[1].name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="removeDevice()">
+        {{ "devices.modal.delete" | translate }}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ data.topic }}</ion-card-title>
-      <ion-card-subtitle>{{ data.type }}</ion-card-subtitle>
+      <ion-card-title>{{ data[1].topic }}</ion-card-title>
+      <ion-card-subtitle>{{ data[1].type }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
   <div class="toggle-button">
     <ion-fab vertical="center" horizontal="center">
-      <ion-fab-button class="fab-size" size="large">
+      <ion-fab-button (click)="togglePower()" [color]="statusColor()" class="fab-size" size="large">
         <ion-icon name="power"></ion-icon>
       </ion-fab-button>
     </ion-fab>

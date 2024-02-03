@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, computed } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
+import { MqttService } from 'ngx-mqtt';
 import { CommandsService } from 'src/app/services/commands.service';
 import { DeviceService } from 'src/app/services/device.service';
-import { MqttService } from 'src/app/services/mqtt/mqtt.service';
+import { removeAction } from 'src/app/stores/device/device.actions';
 import { IDevice, IDeviceDescription } from 'src/app/stores/device/model/IDevice';
 import { SmartsocketTemplateComponent } from 'src/app/templates/smartsocket-template/smartsocket-template.component';
 
@@ -25,17 +26,15 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   public deviceArray = computed((): [string, IDeviceDescription][] => Object.entries(this.devicesList()));
 
-  async ngOnInit() {
-    await this._mqttService.connect();
+  ngOnInit(): void {
+   
   }
 
-  async ngOnDestroy() {
-    await this._mqttService.disconnect();
+  ngOnDestroy() {
   }
 
   public async addCommand() {
     await this._commandService.addCommand();
-
   }
 
   public async addDevice() {
@@ -49,20 +48,11 @@ export class DashboardPage implements OnInit, OnDestroy {
     }, 2000);
   }
 
-  public async powerOnDevice() {
-    this._mqttService.powerOnDevice();
-  }
-  
-  public powerOffDevice() {
-    this._mqttService.powerOffDevice();
-  }
-
-
-  public async openTemplate(payload: IDeviceDescription): Promise<void> {
+  public async openTemplate(payload: [string, IDeviceDescription]): Promise<void> {
 
     let module;
 
-    switch (payload.type) {
+    switch (payload[1].type) {
       case "smartsocket":
         module = SmartsocketTemplateComponent
         break;
@@ -80,5 +70,12 @@ export class DashboardPage implements OnInit, OnDestroy {
       }
     });
     modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    
+    if(role === "deleteDevice") {
+      this._store.dispatch(removeAction({id: data}));
+    }
+
   }
 }

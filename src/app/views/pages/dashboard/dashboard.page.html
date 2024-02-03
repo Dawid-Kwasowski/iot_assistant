@@ -32,20 +32,30 @@
       <ion-title size="large">{{ "app.navigation.dashboard.title" | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
-
+<!-- 
   <ion-button (click)="powerOnDevice()" expand="block">Turn on Smart Socket</ion-button>
-  <ion-button color="danger" (click)="powerOffDevice()" expand="block">Turn off Smart Socket</ion-button>
+  <ion-button color="danger" (click)="powerOffDevice()" expand="block">Turn off Smart Socket</ion-button> -->
 
   <div class="cards">
-    <ion-card (click)="openTemplate(device[1])" *ngFor="let device of deviceArray()">
-      <ion-card-header>
-        <ion-card-title>{{device[1].name}}</ion-card-title>
-        <ion-card-subtitle>{{device[1].type}}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        Topic: {{device[1].topic}}
-      </ion-card-content>
-    </ion-card> 
+    <div *ngIf="deviceArray().length > 0; else noDataTemplate">
+      <ion-card *ngFor="let device of deviceArray()" (click)="openTemplate(device)">
+        <!-- {{ device[1].status | json }} -->
+        <ion-card-header>
+          <ion-card-title>{{device[1].name}}</ion-card-title>
+          <ion-card-subtitle>{{device[1].type}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          Topic: {{device[1].topic}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ng-template #noDataTemplate>
+      <ion-card>
+        <ion-card-content>
+          <p>No devices available.</p>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
   </div>
 </ion-content>
 

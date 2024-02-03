@@ -7,5 +7,6 @@ export interface IDeviceDescription {
     name: string;
     topic: string;
     type: string;
+    status?: string;
 }
 

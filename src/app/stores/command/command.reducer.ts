@@ -16,7 +16,7 @@ export const initialState: ICommand = {
 
 export const commandReducer = createReducer(
    initialState,
-   on(clearAction, (): any => {}),
+   on(clearAction, (state): any => state = {}),
    on(addAction, (state, { command }): ICommand =>  ({...state, ...command})), 
    on(removeAction, (state, { id }): ICommand => {
       const { [id]: removedItem, ...rest } = state;

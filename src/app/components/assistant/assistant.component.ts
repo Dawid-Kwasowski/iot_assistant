@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit, computed, signal } fro
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import { ToastController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import { MqttService } from 'src/app/services/mqtt/mqtt.service';
 import { ICommand, ICommandDescription } from 'src/app/stores/command/model/ICommand';
 
 @Component({
@@ -15,7 +14,6 @@ export class AssistantComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private toastCtrl: ToastController,
     private _store: Store<{commands: ICommand}>,
-    private mqttService: MqttService,
     ) {
       SpeechRecognition.requestPermissions();
     }
@@ -68,10 +66,10 @@ export class AssistantComponent implements OnInit, OnDestroy {
             
             this.timeout = setTimeout(() => {
                 if(this.myText() === "Turn on") {
-                    this.mqttService.powerOnDevice();
+                    // this.mqttService.powerOnDevice();
                   }
                 if(this.myText() === "Turn off") {
-                  this.mqttService.powerOffDevice();
+                  // this.mqttService.powerOffDevice();
                 }
                 this.myText.set('');
             }, 1500)

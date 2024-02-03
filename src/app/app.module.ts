@@ -15,6 +15,8 @@ import { userReducer } from './stores/user/user.reducer';
 import { commandReducer } from './stores/command/command.reducer';
 import { deviceReducer } from './stores/device/device.reducer';
 import { TemplatesModule } from './templates/templates.module';
+import { MqttModule } from 'ngx-mqtt';
+import { environment } from 'src/environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,6 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     TemplatesModule,
     BrowserModule,
     HttpClientModule,
+    MqttModule.forRoot(environment.MQTT_SERVICE_OPTIONS),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

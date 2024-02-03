@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormValidatorService } from './form-validator.service';
 import { CommandsService } from './commands.service';
-import { MqttService } from './mqtt/mqtt.service';
+import { CustomMqttService } from './mqtt/custom-mqtt.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -10,7 +10,7 @@ import { MqttService } from './mqtt/mqtt.service';
   providers: [
     FormValidatorService,
     CommandsService,
-    MqttService
+    CustomMqttService
   ],
 })
 export class ServicesModule { }
