@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit, computed } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import { MqttService } from 'ngx-mqtt';
 import { CommandsService } from 'src/app/services/commands.service';
 import { DeviceService } from 'src/app/services/device.service';
-import { removeAction } from 'src/app/stores/device/device.actions';
+import { loadDevices, removeAction } from 'src/app/stores/device/device.actions';
 import { IDevice, IDeviceDescription } from 'src/app/stores/device/model/IDevice';
 import { SmartsocketTemplateComponent } from 'src/app/templates/smartsocket-template/smartsocket-template.component';
 
@@ -15,19 +14,18 @@ import { SmartsocketTemplateComponent } from 'src/app/templates/smartsocket-temp
 })
 export class DashboardPage implements OnInit, OnDestroy {
   constructor(
-    private _mqttService: MqttService,
     private _commandService: CommandsService,
     private _deviceService: DeviceService,
     private _store: Store<{device: IDevice}>,
-    private modalController: ModalController
+    private modalController: ModalController,
   ) { }
 
   public readonly devicesList = this._store.selectSignal(({ device }): IDevice => device);
 
   public deviceArray = computed((): [string, IDeviceDescription][] => Object.entries(this.devicesList()));
 
-  ngOnInit(): void {
-   
+  async ngOnInit() {
+    this._store.dispatch(loadDevices())
   }
 
   ngOnDestroy() {
@@ -43,7 +41,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   public handleRefresh(event: any) {
     setTimeout(() => {
-      // Any calls to load data go here
+      this._store.dispatch(loadDevices())
       event.target.complete();
     }, 2000);
   }

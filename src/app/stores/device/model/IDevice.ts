@@ -4,9 +4,9 @@ export interface IDevice {
 }
 
 export interface IDeviceDescription {
+    id?: string;
     name: string;
     topic: string;
     type: string;
     status?: string;
 }
-

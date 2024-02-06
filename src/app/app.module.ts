@@ -17,6 +17,8 @@ import { deviceReducer } from './stores/device/device.reducer';
 import { TemplatesModule } from './templates/templates.module';
 import { MqttModule } from 'ngx-mqtt';
 import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { DevicesEffects } from './stores/device/device.effects';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,12 +44,13 @@ export function createTranslateLoader(http: HttpClient) {
       mode: "ios"
     }),
     AppRoutingModule,
+    EffectsModule.forRoot(DevicesEffects),
     StoreModule.forRoot({
       user: userReducer,
       commands: commandReducer,
       device: deviceReducer,
     })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

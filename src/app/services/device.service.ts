@@ -1,10 +1,11 @@
 import { ModalController, ToastController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IDevice } from '../stores/device/model/IDevice';
+import { IDevice, IDeviceDescription } from '../stores/device/model/IDevice';
 import { addAction, removeAction } from '../stores/device/device.actions';
 import { DeviceModalComponent } from '../components/device-modal/device-modal.component';
 import { v4 as uuidv4 } from 'uuid';
+import { SupabaseService } from './supabase/supabase.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +15,20 @@ export class DeviceService {
     private _store: Store<{device: IDevice}>,
     private modalController: ModalController,
     private _toastCtrl: ToastController,
+    private _supabaseService: SupabaseService,
   ) { }
 
 
   public deleteCommand(id: string | number): void {
     this._store.dispatch(removeAction({id}));
+  }
+
+  public getDevices() {
+    return this._supabaseService.getAllDevices();
+  }
+
+  public insertDevice(payload: IDeviceDescription) {
+    return this._supabaseService.insertDevice(payload);
   }
 
 

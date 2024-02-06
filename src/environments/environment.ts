@@ -20,7 +20,6 @@ export const environment = {
   } as IMqttServiceOptions
 };
 
-
     // port: 8083,
     // hostname: "broker.emqx.io",
     // password: "emqx_test",
