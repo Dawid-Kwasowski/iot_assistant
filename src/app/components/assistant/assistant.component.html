@@ -16,7 +16,7 @@
       <ion-card-title>{{"assistant.commands.title" | translate}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-    {{myText()}}
+    {{ counter }} Rura musi jebać 3.3: {{myText()}} 
       <ion-list [inset]="true" *ngIf="commandsArray().length > 0; else noDataTemplate">
         <ion-item *ngFor="let command of commandsArray()">
           <ion-label>{{command[1].name}}</ion-label>

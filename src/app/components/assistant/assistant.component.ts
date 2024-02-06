@@ -13,16 +13,16 @@ export class AssistantComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private toastCtrl: ToastController,
-    private _store: Store<{commands: ICommand}>,
-    ) {
-      SpeechRecognition.requestPermissions();
-    }
+    private _store: Store<{ commands: ICommand }>,
+  ) {
+    SpeechRecognition.requestPermissions();
+  }
 
   public readonly commands = this._store.selectSignal(({ commands }): ICommand => commands);
-  
-  public commandsArray = computed((): [string, ICommandDescription][] => Object.entries(this.commands()));
 
-  
+  public commandsArray = computed((): [string, ICommandDescription][] => Object.entries(this.commands()));
+  public counter = 0;
+
   public async ngOnInit(): Promise<void> {
     this.startRecognition();
   }
@@ -37,7 +37,7 @@ export class AssistantComponent implements OnInit, OnDestroy {
   private timeout!: any;
 
   public onListening(): void {
-    if(this.recording && this.commandsArray().length > 0) {
+    if (this.recording && this.commandsArray().length > 0) {
       this.stopRecognition();
     } else {
       this.startRecognition();
@@ -45,53 +45,63 @@ export class AssistantComponent implements OnInit, OnDestroy {
   }
 
   public async startRecognition(): Promise<void> {
-    
+
     try {
-      const {available} = await SpeechRecognition.available();
+      const { available } = await SpeechRecognition.available();
       if (available) {
         this.recording = true;
+
         SpeechRecognition.start({
           popup: true,
           partialResults: true,
           language: 'en-US',
+          maxResults: 1,
         });
-        
+
         SpeechRecognition.addListener('partialResults', (data: any) => {
-          if(data.matches.length && data.matches.length > 0) {
+
+          this.counter++;
+
+          if (data.matches.length && data.matches.length > 0) {
             this.myText.set(data.matches[0]);
-            
-            if(this.timeout) {
+            if (this.timeout) {
               clearTimeout(this.timeout);
             }
-            
+
+            if (this.myText() === "Turn on and make it own") {
+              this.myText.set('DUPA BLADA');
+            }
+
+            else if (this.myText() === "Turn off") {
+              this.myText.set('DUPA BLADA OFF');
+            }
+
             this.timeout = setTimeout(() => {
-                if(this.myText() === "Turn on") {
-                    // this.mqttService.powerOnDevice();
-                  }
-                if(this.myText() === "Turn off") {
-                  // this.mqttService.powerOffDevice();
-                }
-                this.myText.set('');
-            }, 1500)
+              // SpeechRecognition.stop();
+              this.myText.set(''); 
+              this.changeDetectorRef.detectChanges(); 
+              // SpeechRecognition.start(this.options);
+            }, 2500);
+        
             this.changeDetectorRef.detectChanges();
           }
         });
       }
 
-      
+
     } catch {
-      const toast = this.toastCtrl.create({message: "Speech recognition is unsupported", duration: 5000, color: 'danger'});
+      const toast = this.toastCtrl.create({ message: "Speech recognition is unsupported", duration: 5000, color: 'danger' });
       (await toast).present()
-    }    
+    }
   }
 
   public async stopRecognition(): Promise<void> {
-    if(this.timeout) {
+    if (this.timeout) {
       clearTimeout(this.timeout);
     }
     this.recording = false;
     await SpeechRecognition.stop();
   }
 
-  
+
 }
