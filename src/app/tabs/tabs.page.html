@@ -11,7 +11,7 @@
       <ion-label>{{ "app.navigation.room.title" | translate }}</ion-label>
     </ion-tab-button> 
      -->
-    <ion-tab-button #mic class="mic" color="danger">
+    <ion-tab-button #mic (click)="onStart()" class="mic" color="danger">
       <ion-icon size="large" name="mic"></ion-icon>
       <ion-ripple-effect></ion-ripple-effect>
     </ion-tab-button> 

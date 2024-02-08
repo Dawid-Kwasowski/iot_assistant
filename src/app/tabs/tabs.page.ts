@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { GestureController, GestureDetail, ModalController } from '@ionic/angular';
 import { AssistantComponent } from '../components/assistant/assistant.component';
 @Component({
@@ -6,7 +6,7 @@ import { AssistantComponent } from '../components/assistant/assistant.component'
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage implements AfterViewInit {
+export class TabsPage {
 
   @ViewChild('mic', { read: ElementRef }) mic!: ElementRef<HTMLIonTabButtonElement>;
 
@@ -17,36 +17,34 @@ export class TabsPage implements AfterViewInit {
     private zone: NgZone,
   ) {}
 
-  public ngAfterViewInit(): void {
-    this.useLongPress(this.mic);
-  }
+  // public ngAfterViewInit(): void {
+  //   this.useLongPress(this.mic);
+  // }
 
-  public useLongPress(element: ElementRef<any>): void {
-    const gesture = this.gestureCtrl.create({
-      el: element.nativeElement,
-      gestureName: 'long-press',
-      onStart: (ev): void => {
-        this.onStart(ev)
-      },
-      onEnd: (ev): void => {
-        this.onEnd(ev)
-      },
-    });
-    gesture.enable(true);
-  }
+  // public useLongPress(element: ElementRef<any>): void {
+  //   const gesture = this.gestureCtrl.create({
+  //     el: element.nativeElement,
+  //     gestureName: 'long-press',
+  //     onStart: (ev): void => {
+  //       this.onStart(ev)
+  //     },
+  //     onEnd: (ev): void => {
+  //       this.onEnd(ev)
+  //     },
+  //   });
+  //   gesture.enable(true);
+  // }
  
-  public onStart(ev: GestureDetail): boolean | void {
-    this.timeout = setTimeout((): void => {
-      this.zone.run(async (): Promise<void> => {
-        const modal = await this.modalCtrl.create({
-          component: AssistantComponent,
-          breakpoints: [0, 0.25, 0.5, 0.75],
-          initialBreakpoint: 0.25
-        })
+  public onStart(): boolean | void {
+    this.zone.run(async (): Promise<void> => {
+      const modal = await this.modalCtrl.create({
+        component: AssistantComponent,
+        breakpoints: [0, 0.25, 0.5, 0.75],
+        initialBreakpoint: 0.25
+      })
 
-        modal.present();
-      });
-    },2000);
+      modal.present();
+    });
   }
   public onEnd(ev: GestureDetail): boolean | void {
     clearTimeout(this.timeout);

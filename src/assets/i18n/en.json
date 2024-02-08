@@ -37,7 +37,8 @@
    "assistant": {
         "title": "Your IoT Assistant",
         "commands": {
-            "title": "List of commands"
+            "title": "List of commands",
+            "hint": "Hint: [Command] [device name]"
         }
    },
    "commands": {

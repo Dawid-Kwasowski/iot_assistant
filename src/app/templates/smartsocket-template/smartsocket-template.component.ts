@@ -28,8 +28,8 @@ export class SmartsocketTemplateComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit() {
-    this._mqttService.unsafePublish(`cmnd/${this.data[1].name}/POWER`, " ");
-    this._mqttService.observe(`stat/${this.data[1].name}/RESULT`).subscribe({
+    this._mqttService.unsafePublish(`cmnd/${this.data[1].topic}/POWER`, " ");
+    this._mqttService.observe(`stat/${this.data[1].topic}/RESULT`).subscribe({
       next: (value): void => {
         const result = JSON.parse(value.payload.toString());
         if(result.POWER) {
@@ -49,8 +49,7 @@ export class SmartsocketTemplateComponent implements OnInit, OnDestroy {
     else {
       newStatus = "OFF";
     }
-
-    this._mqttService.unsafePublish(`cmnd/${this.data[1].name}/POWER`, newStatus);
+    this._mqttService.unsafePublish(`cmnd/${this.data[1].topic}/POWER`, newStatus);
   }
 
   public cancel() {
